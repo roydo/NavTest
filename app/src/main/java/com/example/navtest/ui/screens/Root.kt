@@ -29,6 +29,7 @@ fun Root(modifier: Modifier = Modifier) {
             Home(
                 toScreenA = { navController.navigate(Screens.SCREEN_A.name) },
                 toScreenB = { navController.navigate(Screens.SCREEN_B.name) },
+                modifier = modifier
             )
         }
 
