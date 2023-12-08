@@ -3,6 +3,8 @@ package com.example.navtest.ui.screens
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -33,22 +35,27 @@ fun Root(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(Screens.SCREEN_A.name) {
-            ScreenA(toHome = { navController.navigate(Screens.HOME.name)})
+        composable(
+            Screens.SCREEN_A.name,
+            enterTransition = {
+                slideInHorizontally(
+                    animationSpec = tween(300)
+                )
+            }
+        ) {
+            ScreenA(toHome = { navController.navigate(Screens.HOME.name) })
         }
 
         composable(
             Screens.SCREEN_B.name,
             enterTransition = {
-                fadeIn(
-                    animationSpec = tween(300)
-                ) + slideIntoContainer(
+                slideInHorizontally(
                     animationSpec = tween(300),
-                    towards = AnimatedContentTransitionScope.SlideDirection.Start
+                    initialOffsetX = { it }
                 )
             }
         ) {
-            ScreenB(toHome = {navController.navigate(Screens.HOME.name)})
+            ScreenB(toHome = { navController.navigate(Screens.HOME.name) })
         }
     }
 }
