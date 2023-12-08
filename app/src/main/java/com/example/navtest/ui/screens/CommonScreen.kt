@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,24 +24,28 @@ fun CommonScreen(
     screenColor: Color,
     toHome: () -> Unit
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Surface(
+        color = screenColor,
         modifier = modifier
-            .fillMaxSize()
     ) {
-        Text(
-            text = "This screen is $screenName",
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            color = screenColor
-        )
-        Button(
-            onClick = toHome,
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(top = 16.dp)
+                .fillMaxSize()
         ) {
-            Text(text = "HOME")
+            Text(
+                text = "This screen is $screenName",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            ElevatedButton(
+                onClick = toHome,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+            ) {
+                Text(text = "HOME")
+            }
         }
     }
 }
@@ -47,7 +53,7 @@ fun CommonScreen(
 @Preview(showBackground = true)
 @Composable
 fun CommonScreenPreview() {
-    CommonScreen(screenName = "Test", screenColor = Color.Black) {
+    CommonScreen(screenName = "Test", screenColor = MaterialTheme.colorScheme.primary) {
 
     }
 }
